@@ -5,8 +5,45 @@
 # USER OPTIONS LOGIC
 #   Game Start
 #   Display Welcome Message
-
+def welcome():
+    print('''
+    Welcome to Pirate Battleships
+    This is a test for the multi line string
+    To see how it formats it when it runs
+    ''')
+    print('''
+      . .    . .  . . .  . .  . .     ,((/. .    . .  . . .  . .  . .    . .
+    . .    . .  . . .  . .  .@@@@@@@@@@@@@@@@@ . .  . . .  . .  . .    . .
+    . .    . .  . . .  . . @@@@@@@@@@@@@@@@@@@@@ .  . . .  . .  . .    . .
+    @ . .    . .  . . .  . .&@@@@@@@@@@@@@@@@@@@@@@   . . .  . .  . .    . ,
+    .@@ .    . .  . . .  .  @@*@@@@@@@@@@@@@@@@@@@@@  . . .  . .  . .    .@@
+    *@@@    . .  . . .  . .@/@@.     @@@/. .  %@ @@  . . .  . .  . .  /@@@
+    .@@@@( . .  . . .  . .@/@@.    @@.@@@ .  @@ @.  . . .  . .  . .@@@.@ .
+    . .@@@@@ .  . . .  . ..@@@@@@@@@ . /@@@@@@@@@.  . . .  . .  *@@@,@ . .
+    . .  @@@@@@ .   .  .        %@@@@@&@@@@@ *%. .  . . .  . .@@@@%@   . .
+            &@@@@@@.          ,@( (@@@@@@@@  @@            #@@@@,@,
+    . .    . @@@@@#@@  .     @@    . .. . ,@(  .    ..@@&@@@@(  . .  . .
+    .  . .  . .    %@@@@.@@@   . @@@@@@@@@@@@@/ . . *@@&.@@@@,.    . .  . .
+    .  . .  . .    . . @@@@&,@@@&   @@@&@@@% . .@@@@ @@@@&  . .    . .  . .
+    .  . .  . .    . .  .  @@@@@,%@@@@/ ..&@@@@,&@@@@# . .  . .    . .  . .
+    .  . .  . .  @@@@@  . .    .@@@@@%.@@@@@&,%@# .    . .%@@@@    . .  . .
+    .  . .  . .  @@@.@@@. ,%@@@@@& ,#*@@@@@@* (@@@@@@* .@@@%@@@.   . .  . .
+    .  . .@@@ @@(@@*@&%@@@@ &@@@@@@#. . .  .*@@@@@@@*/@@@@ @,@@ @@ @@@  . .
+    .  . @@@@@ @@@@@@@@%@@ *   . .  . . .  . .  . . . @@@/@@@@@@@,*@@@@ . .
+        ,@@/          @@@ (#                    *% /@@          (@@#
+                        @@@@@%                   @@@@@
+    ''')
 #   Grid size selection 6x6 or 10x10 message
+    play = input('''
+    Would you like to play a game me 'arty? (enter 'Y' to play) : ''').lower()
+
+    if play == "y":
+        print("start game") # enter name of next function here
+    else:
+        print('''
+        Argh! you woke me up for nothin... its the plank for you...
+        ''')
+        quit()
 #   user input of choice of board Size
 #   validation of user input
 #   display error message if input fails vaidation
@@ -108,3 +145,5 @@
 #   user input validation
 #   if yes - restart game
 #   if no - display a thank you for playing message and exit app
+
+welcome()
