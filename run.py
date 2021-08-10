@@ -6,6 +6,33 @@
 #   Game Start
 #   Display Welcome Message
 def welcome():
+
+    def get_dimensions():
+
+        print('''
+    Good on ya, argh, we'll make a pirate out of ye yet!''')
+        while True:
+            try:
+                dimensions = int(input('''
+    How brave are ye? Shall we play a full game or a little one?
+    Select a board size, enter '6' for a little one or '10' for normal : '''))
+                if dimensions == 6:
+                    print("They picked six")
+                    break
+                elif dimensions == 10:
+                    print("They picked ten")
+                    break
+# added incase the value entered does not convert to an int
+# but it doesn't seem to work
+            except TypeError:
+                print('''
+    It needs to be a number see, like a '6' or a '10'
+    Let's try again!''')
+            except ValueError:
+                print('''
+    Don't be getting all artistic with the choices like some scurvy landlover
+    It's either '6' or '10' that be it. Try again!''')
+
     print('''
     Welcome to Pirate Battleships
     This is a test for the multi line string
@@ -34,16 +61,32 @@ def welcome():
                         @@@@@%                   @@@@@
     ''')
 #   Grid size selection 6x6 or 10x10 message
-    play = input('''
+
+    loop = True
+    while loop:
+        play = input('''
     Would you like to play a game me 'arty? (enter 'Y' to play) : ''').lower()
 
-    if play == "y":
-        print("start game") # enter name of next function here
-    else:
-        print('''
-        Argh! you woke me up for nothin... its the plank for you...
-        ''')
-        quit()
+        try:
+            if play == "y":
+                get_dimensions()
+            else:
+                print('''
+    Argh! you woke me up for nothin... I should make ye walk the plank...
+    Wait, shall we try that again?
+    from the else statement''')
+                continue
+        except ValueError:
+            print('''
+    Argh! you woke me up for nothin... I should make ye walk the plank...
+    Wait, shall we try that again?
+    from the first valueerror''')
+        except TypeError:
+            print('''
+    Argh! you woke me up for nothin... I should make ye walk the plank...
+    Wait, shall we try that again?
+    from the first type error''')
+
 #   user input of choice of board Size
 #   validation of user input
 #   display error message if input fails vaidation
