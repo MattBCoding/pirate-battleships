@@ -7,6 +7,10 @@
 #   Display Welcome Message
 def welcome():
 
+    #   difficulty options -
+    #   easy, comp selects location at random,
+    #   normal, comp will select neighbouring tiles on hit,
+    #   hard, comp will pick tiles based on algorithm
     def get_difficulty(dimensions):
 
         loop = True
@@ -14,11 +18,15 @@ def welcome():
             try:
                 if dimensions == 6:
                     difficulty = input('''
-    A little one, I suppose you want it easy as well right?
-    Select your difficulty, enter 'E' for easy or 'H' for hard : ''').lower()
+    A little one, suppose you want it easy as well? Select your difficulty,
+    enter 'E' for easy, 'N' for normal or 'H' for hard : ''').lower()
                     if difficulty == 'e':
                         loop = False
                         print("difficulty set to easy")
+                        print(difficulty)
+                    elif difficulty == 'n':
+                        loop = False
+                        print("difficulty set to normal")
                         print(difficulty)
                     elif difficulty == 'h':
                         loop = False
@@ -27,14 +35,19 @@ def welcome():
                     else:
                         print('''
     There ye go getting artistic, are ye a pirate or a West Indian spy?
-    Try again, before we make ye walk the plank, it's 'E' or 'H' ''')
+    Try again, before we make ye walk the plank, it's 'E', 'N' or 'H' ''')
                 elif dimensions == 10:
                     difficulty = input('''
-    Hmm your a brave one, should ye be a brave pirate to try and impress me?
-    Select your difficulty, enter 'E' for easy or 'H' for hard : ''').lower()
+    Hmm a full one, ye be a brave pirate to tryin to impress me? If you really
+    want to impress me, you should try it on hard Select your difficulty,
+    enter 'E' for easy, 'N' for normal or 'H' for hard : ''').lower()
                     if difficulty == 'e':
                         loop = False
                         print("difficulty set to easy")
+                        print(difficulty)
+                    elif difficulty == 'n':
+                        loop = False
+                        print("difficulty set to normal")
                         print(difficulty)
                     elif difficulty == 'h':
                         loop = False
@@ -43,12 +56,13 @@ def welcome():
                     else:
                         print('''
     There ye go getting artistic, are ye a pirate or a West Indian spy?
-    Try again, before we make ye walk the plank, it's 'E' or 'H' ''')
+    Try again, before we make ye walk the plank, it's 'E', 'N' or 'H' ''')
             except ValueError:
                 print('''
     There ye go getting artistic, are ye a pirate or a West Indian spy?
-    Try again, before we make ye walk the plank, it's 'E' or 'H' ''')
+    Try again, before we make ye walk the plank, it's 'E', 'N' or 'H' ''')
 
+#   user input of choice of board Size
     def get_dimensions():
 
         print('''
@@ -58,6 +72,7 @@ def welcome():
                 dimensions = int(input('''
     How brave are ye? Shall we play a full game or a little one?
     Select a board size, enter '6' for a little one or '10' for normal : '''))
+#   validation of user input
                 if dimensions == 6:
                     get_difficulty(dimensions)
                     break
@@ -68,6 +83,7 @@ def welcome():
                     continue
 # added incase the value entered does not convert to an int
 # but it doesn't seem to work
+#   display error message if input fails vaidation
             except TypeError:
                 print('''
     It needs to be a number see, like a '6' or a '10'
@@ -136,17 +152,7 @@ def welcome():
     Wait, shall we try that again?
     from the first type error''')
 
-#   user input of choice of board Size
-#   validation of user input
-#   display error message if input fails vaidation
-
-#   difficulty options -
-#   easy, comp selects location at random,
-#   normal, comp will select neighbouring tiles on hit,
-#   hard, comp will pick tiles based on algorithm
-
 #   display board - based on size selected
-
 
 # GAME SETUP LOGIC
 #   display message informing user on next ship to be placed - name and size
