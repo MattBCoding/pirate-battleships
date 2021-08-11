@@ -2,9 +2,98 @@
 
 # python code goes here
 
+#   display board - based on size selected
+class Board:
+    '''
+    Creates a 2d list for the game board(s)
+    to display ship locations
+
+    @parameters
+    takes in name, dimensions
+
+    '''
+    def __init__(self, name, dimensions):
+        self.name = name
+        self.board = [
+            ["~" for i in range(dimensions)] for i in range(dimensions)
+            ]
+
+
+def setup(dimensions, difficulty):
+
+    player = Board('player', dimensions)
+    comp = Board('comp', dimensions)
+
+    letter = 0
+    # display_boards = 2
+    # for i in range(display_boards):
+
+    print(' '*2, end='| ')
+    for i in range(dimensions):
+        # print('    ')
+        print(i, end=' ')
+    print('| ', ' '*20, end=' ')
+    print(' '*2, end='| ')
+    for i in range(dimensions):
+        # print('    ')
+        print(i, end=' ')
+    print('| ')
+
+    # for letter in range(dimensions):
+    #     print(chr(letter + 65), end=' | ')
+    #     for row in range(dimensions):
+    #         for column in range(dimensions):
+    #             print(player.board[row][column], end=' ')
+    #         print(' | ')
+
+    for letter in range(dimensions):
+        print(chr(letter + 65), end=' | ')
+        for column in range(len(player.board[letter])):
+            print(player.board[letter][column], end=' ')
+        print('|', ' '*20, end='  ')
+        print(chr(letter + 65), end=' | ')
+        for column in range(len(comp.board[letter])):
+            print(comp.board[letter][column], end=' ')
+        print('| ')
+        letter += 1
+    # for row in range(dimensions):
+    #     print(player.board[row][column])
+    #     row += 1
+    # print(comp.board)
+
+# GAME SETUP LOGIC
+
+#   display message informing user on next ship to be placed - name and size
+#   user input starting location for next ship
+#   input validation
+#   display error message - repeat user input
+#   validation of ship location - does ship fit starting in that location in
+#       either horizontal or vertical orientation?
+#   if fails location validation - display error message to user
+#       informing them why and repeat user input
+#   display message asking user if ship horizontal or vertical
+#   user choice h = horizontal v = vertical
+#   user input layout of ship, horizontal or vertical
+#   input validation
+#   display error message if wrong type of input inserted by user
+#       - repeat user input
+#   validation of ship location - does ship fit in selected location
+#   display error message if ship does not fit, informing user why
+#       - repeat user input
+#   validation of ship location - does ship overlap any other ships?
+#   display error message informing user
+#       - repeat user input to select alternative location
+#   ship location ok
+#   store ship location to board
+#   check to see if more ships still to be placed
+#       if yes repeat earlier steps for next ship
+#   finalise grid and store player ship locations
+
 # USER OPTIONS LOGIC
 #   Game Start
 #   Display Welcome Message
+
+
 def welcome():
 
     #   difficulty options -
@@ -24,14 +113,17 @@ def welcome():
                         loop = False
                         print("difficulty set to easy")
                         print(difficulty)
+                        setup(dimensions, difficulty)
                     elif difficulty == 'n':
                         loop = False
                         print("difficulty set to normal")
                         print(difficulty)
+                        setup(dimensions, difficulty)
                     elif difficulty == 'h':
                         loop = False
                         print("difficulty set to hard")
                         print(difficulty)
+                        setup(dimensions, difficulty)
                     else:
                         print('''
     There ye go getting artistic, are ye a pirate or a West Indian spy?
@@ -45,14 +137,17 @@ def welcome():
                         loop = False
                         print("difficulty set to easy")
                         print(difficulty)
+                        setup(dimensions, difficulty)
                     elif difficulty == 'n':
                         loop = False
                         print("difficulty set to normal")
                         print(difficulty)
+                        setup(dimensions, difficulty)
                     elif difficulty == 'h':
                         loop = False
                         print("difficulty set to hard")
                         print(difficulty)
+                        setup(dimensions, difficulty)
                     else:
                         print('''
     There ye go getting artistic, are ye a pirate or a West Indian spy?
@@ -151,35 +246,6 @@ def welcome():
     Argh! you woke me up for nothin... I should make ye walk the plank...
     Wait, shall we try that again?
     from the first type error''')
-
-#   display board - based on size selected
-
-# GAME SETUP LOGIC
-#   display message informing user on next ship to be placed - name and size
-#   user input starting location for next ship
-#   input validation
-#   display error message - repeat user input
-#   validation of ship location - does ship fit starting in that location in
-#       either horizontal or vertical orientation?
-#   if fails location validation - display error message to user
-#       informing them why and repeat user input
-#   display message asking user if ship horizontal or vertical
-#   user choice h = horizontal v = vertical
-#   user input layout of ship, horizontal or vertical
-#   input validation
-#   display error message if wrong type of input inserted by user
-#       - repeat user input
-#   validation of ship location - does ship fit in selected location
-#   display error message if ship does not fit, informing user why
-#       - repeat user input
-#   validation of ship location - does ship overlap any other ships?
-#   display error message informing user
-#       - repeat user input to select alternative location
-#   ship location ok
-#   store ship location to board
-#   check to see if more ships still to be placed
-#       if yes repeat earlier steps for next ship
-#   finalise grid and store player ship locations
 
 
 # PLAY GAME LOGIC
