@@ -7,6 +7,48 @@
 #   Display Welcome Message
 def welcome():
 
+    def get_difficulty(dimensions):
+
+        loop = True
+        while loop:
+            try:
+                if dimensions == 6:
+                    difficulty = input('''
+    A little one, I suppose you want it easy as well right?
+    Select your difficulty, enter 'E' for easy or 'H' for hard : ''').lower()
+                    if difficulty == 'e':
+                        loop = False
+                        print("difficulty set to easy")
+                        print(difficulty)
+                    elif difficulty == 'h':
+                        loop = False
+                        print("difficulty set to hard")
+                        print(difficulty)
+                    else:
+                        print('''
+    There ye go getting artistic, are ye a pirate or a West Indian spy?
+    Try again, before we make ye walk the plank, it's 'E' or 'H' ''')
+                elif dimensions == 10:
+                    difficulty = input('''
+    Hmm your a brave one, should ye be a brave pirate to try and impress me?
+    Select your difficulty, enter 'E' for easy or 'H' for hard : ''').lower()
+                    if difficulty == 'e':
+                        loop = False
+                        print("difficulty set to easy")
+                        print(difficulty)
+                    elif difficulty == 'h':
+                        loop = False
+                        print("difficulty set to hard")
+                        print(difficulty)
+                    else:
+                        print('''
+    There ye go getting artistic, are ye a pirate or a West Indian spy?
+    Try again, before we make ye walk the plank, it's 'E' or 'H' ''')
+            except ValueError:
+                print('''
+    There ye go getting artistic, are ye a pirate or a West Indian spy?
+    Try again, before we make ye walk the plank, it's 'E' or 'H' ''')
+
     def get_dimensions():
 
         print('''
@@ -17,11 +59,13 @@ def welcome():
     How brave are ye? Shall we play a full game or a little one?
     Select a board size, enter '6' for a little one or '10' for normal : '''))
                 if dimensions == 6:
-                    print("They picked six")
+                    get_difficulty(dimensions)
                     break
                 elif dimensions == 10:
-                    print("They picked ten")
+                    get_difficulty(dimensions)
                     break
+                else:
+                    continue
 # added incase the value entered does not convert to an int
 # but it doesn't seem to work
             except TypeError:
@@ -65,11 +109,16 @@ def welcome():
     loop = True
     while loop:
         play = input('''
-    Would you like to play a game me 'arty? (enter 'Y' to play) : ''').lower()
+    Would you like to play a game me 'arty?
+    (enter 'Y' to play or 'Q' to quit) : ''').lower()
 
         try:
             if play == "y":
                 get_dimensions()
+            elif play == "q":
+                print('''
+    Goodbye''')
+                quit()
             else:
                 print('''
     Argh! you woke me up for nothin... I should make ye walk the plank...
