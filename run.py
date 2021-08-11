@@ -1,6 +1,7 @@
 # import required modules here
-
+import math
 # python code goes here
+
 
 #   display board - based on size selected
 class Board:
@@ -12,11 +13,20 @@ class Board:
     takes in name, dimensions
 
     '''
+    number_of_ships_ratio = 0.6
+
     def __init__(self, name, dimensions):
         self.name = name
+        self.dimensions = dimensions
         self.board = [
             ["~" for i in range(dimensions)] for i in range(dimensions)
             ]
+
+    def calculate_number_of_ships(self):
+        number_of_ships_ratio = 0.6
+        number_of_ships = math.floor(self.dimensions * number_of_ships_ratio)
+        print(number_of_ships)
+        return number_of_ships
 
 
 def setup(dimensions, difficulty):
@@ -56,6 +66,8 @@ def setup(dimensions, difficulty):
             print(comp.board[letter][column], end=' ')
         print('| ')
         letter += 1
+
+    print(player.calculate_number_of_ships())
     # for row in range(dimensions):
     #     print(player.board[row][column])
     #     row += 1
