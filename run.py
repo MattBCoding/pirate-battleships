@@ -3,6 +3,18 @@ import math
 # python code goes here
 
 
+class Ship:
+    '''
+    Creates ship objects
+    parameters: name of ship, length of ship, board ship is on
+    '''
+
+    def __init__(self, name, length, board):
+        self.name = name
+        self.length = length
+        self.board = board
+
+
 #   display board - based on size selected
 class Board:
     '''
@@ -27,6 +39,24 @@ class Board:
         number_of_ships = math.floor(self.dimensions * number_of_ships_ratio)
         print(number_of_ships)
         return number_of_ships
+
+    def create_ships(self, number_of_ships):
+        self.number_of_ships = number_of_ships
+
+        ships = [
+            ['Brigantine', 2],
+            ['Lugger', 3],
+            ['Schooner', 3],
+            ['Sloop', 4],
+            ['Pinnace', 5]
+            ]
+        player_ships = []
+        x = 0
+        while x < self.number_of_ships:
+            v = x % len(ships)
+            player_ships.append(ships[v])
+            x += 1
+            print(player_ships)
 
 
 def setup(dimensions, difficulty):
@@ -67,7 +97,7 @@ def setup(dimensions, difficulty):
         print('| ')
         letter += 1
 
-    print(player.calculate_number_of_ships())
+    player.create_ships(player.calculate_number_of_ships())
     # for row in range(dimensions):
     #     print(player.board[row][column])
     #     row += 1
