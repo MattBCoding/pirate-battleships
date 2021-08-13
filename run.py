@@ -9,7 +9,7 @@ class Ship:
     parameters: name of ship, length of ship, board ship is on
     '''
 
-    def __init__(self, name, length, board):
+    def __init__(self, board, name, length):
         self.name = name
         self.length = length
         self.board = board
@@ -74,43 +74,73 @@ def setup(dimensions, difficulty):
     # display_boards = 2
     # for i in range(display_boards):
 
+    # prints first line of board with numbers for column reference
     print(' '*2, end='| ')
     for i in range(dimensions):
         # print('    ')
         print(i, end=' ')
+    # prints ending character for numbers area and gap to new board
     print('| ', ' '*20, end=' ')
+    # prints first line of board with numbers for column reference board 2
     print(' '*2, end='| ')
     for i in range(dimensions):
         # print('    ')
         print(i, end=' ')
     print('| ')
 
-    # for letter in range(dimensions):
-    #     print(chr(letter + 65), end=' | ')
-    #     for row in range(dimensions):
-    #         for column in range(dimensions):
-    #             print(player.board[row][column], end=' ')
-    #         print(' | ')
-
+    # prints actual boards to screen,
     for letter in range(dimensions):
+        # puts a capital letter in front of each row of board
         print(chr(letter + 65), end=' | ')
         for column in range(len(player.board[letter])):
             print(player.board[letter][column], end=' ')
+    # prints ending character for numbers area and gap to new board
         print('|', ' '*20, end='  ')
+    # prints actual boards to screen,
+        # puts a capital letter in front of each row of board
         print(chr(letter + 65), end=' | ')
         for column in range(len(comp.board[letter])):
             print(comp.board[letter][column], end=' ')
         print('| ')
         letter += 1
 
+    # creates a nested list of ships for the board based on dimensions
+    # embedded function sorts the list into descending order
     player.create_ships(player.calculate_number_of_ships())
-    print('From inside setup')
-    print(player.ships)
+    for ship in player.ships:
+        while True:
+            try:
+                user_input_coords = input(f'''
+    Please select the starting location for your {ship[0]}, it is
+    {ship[1]} tiles long, in the format of row then column e.g. 'E4' : ''')
+                # convert input to list
+                user_input_coords_list = list(user_input_coords)
+                # check first character is a letter
+                if user_input_coords_list[0].isalpha():
+                    if user_input_coords_list[1].isdigit():
+                        print(f'''
+    Coords entered correctly, row was {user_input_coords_list[0]}
+    column was {user_input_coords_list[1]}''')
+                        break
+                    else:
+                        print('''
+    The starting location needs to be entered in the format of row then
+    column, e.g. 'F4' or 'A2' a letter followed by a number,
+    no spaces, dashes, dots or bottles of rum before after or in the
+    middle. Try again!''')
+                else:
+                    print('''
+    The starting location needs to be entered in the format of row then
+    column, e.g. 'F4' or 'A2' a letter followed by a number,
+    no spaces, dashes, dots or bottles of rum before after or in the
+    middle. Try again!''')
+            except TypeError:
+                print('''
+    The starting location needs to be entered in the format of row then
+    column, e.g. 'F4' or 'A2' a letter followed by a number,
+    no spaces, dashes, dots or bottles of rum before after or in the
+    middle. Try again!''')
 
-    # for row in range(dimensions):
-    #     print(player.board[row][column])
-    #     row += 1
-    # print(comp.board)
 
 # GAME SETUP LOGIC
 
