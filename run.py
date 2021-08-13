@@ -65,6 +65,59 @@ class Board:
         print(self.ships)
 
 
+def check_user_coords_input(user_input, dimensions):
+    '''
+    Function checks the user input values are correct and located on the board
+    parameters:
+    user_input = the inputted values from the user
+    dimensions = the board dimensions
+    '''
+    # convert user input into list
+    user_input_coords_list = list(user_input)
+    if len(user_input_coords_list) == 2:
+        # check first character is a letter
+        if user_input_coords_list[0].isalpha():
+            # check second character is a number
+            if user_input_coords_list[1].isdigit():
+                print(f'''
+    Coords entered correctly, row was {user_input_coords_list[0]}
+    column was {user_input_coords_list[1]}''')
+                row_test = ((ord
+                            (user_input_coords_list[0].upper())
+                            - 65) < dimensions)
+                column_test = (int(user_input_coords_list[1]) < dimensions)
+                if(row_test and column_test):
+                    print('coords on board')
+                    return True
+                else:
+                    print(f'''
+    The location entered is not on the board! The format is row then column,
+    e.g. 'A2' or 'C5'. Try Again!''')
+                    return False
+            else:
+                print('''
+    The starting location needs to be entered in the format of row then
+    column, e.g. 'F4' or 'A2' a letter followed by a number,
+    no spaces, dashes, dots or bottles of rum before after or in the
+    middle. Try again!''')
+                return False
+        else:
+            print('''
+    The starting location needs to be entered in the format of row then
+    column, e.g. 'F4' or 'A2' a letter followed by a number,
+    no spaces, dashes, dots or bottles of rum before after or in the
+    middle. Try again!''')
+            return False
+    else:
+        print('''
+    Don't be making up your own coordinate system! We pirates use
+    row then column, our maps are simple so we can read them whilst drunk!
+    Try again, keep it in the format of row then column, e.g. 'F4' or 'A2'
+    a letter followed by a number, no spaces, dashes, dots or bottles of rum
+    before, after or in the middle.''')
+        return False
+
+
 def setup(dimensions, difficulty):
 
     player = Board('player', dimensions)
@@ -113,40 +166,8 @@ def setup(dimensions, difficulty):
                 user_input_coords = input(f'''
     Please select the starting location for your {ship[0]}, it is
     {ship[1]} tiles long, in the format of row then column e.g. 'E4' : ''')
-                # convert input to list
-                user_input_coords_list = list(user_input_coords)
-                # check first character is a letter
-                if user_input_coords_list[0].isalpha():
-                    # check second character is a number
-                    if user_input_coords_list[1].isdigit():
-                        print(f'''
-    Coords entered correctly, row was {user_input_coords_list[0]}
-    column was {user_input_coords_list[1]}''')
-                        row_test = ((ord
-                                    (user_input_coords_list[0].upper())
-                                    - 65) < dimensions)
-                        column_test = (int(user_input_coords_list[1]) < dimensions)
-                        if(row_test and column_test):
-                            print('coords on board')
-                            break
-                        else:
-                            print('''
-    The starting location needs to be entered in the format of row then
-    column, e.g. 'F4' or 'A2' a letter followed by a number,
-    no spaces, dashes, dots or bottles of rum before after or in the
-    middle. Try again!''')
-                    else:
-                        print('''
-    The starting location needs to be entered in the format of row then
-    column, e.g. 'F4' or 'A2' a letter followed by a number,
-    no spaces, dashes, dots or bottles of rum before after or in the
-    middle. Try again!''')
-                else:
-                    print('''
-    The starting location needs to be entered in the format of row then
-    column, e.g. 'F4' or 'A2' a letter followed by a number,
-    no spaces, dashes, dots or bottles of rum before after or in the
-    middle. Try again!''')
+                if check_user_coords_input(user_input_coords, dimensions):
+                    print("ok to proceed to orientation")
             except TypeError:
                 print('''
     The starting location needs to be entered in the format of row then
