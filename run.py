@@ -117,11 +117,24 @@ def setup(dimensions, difficulty):
                 user_input_coords_list = list(user_input_coords)
                 # check first character is a letter
                 if user_input_coords_list[0].isalpha():
+                    # check second character is a number
                     if user_input_coords_list[1].isdigit():
                         print(f'''
     Coords entered correctly, row was {user_input_coords_list[0]}
     column was {user_input_coords_list[1]}''')
-                        break
+                        row_test = ((ord
+                                    (user_input_coords_list[0].upper())
+                                    - 65) < dimensions)
+                        column_test = (int(user_input_coords_list[1]) < dimensions)
+                        if(row_test and column_test):
+                            print('coords on board')
+                            break
+                        else:
+                            print('''
+    The starting location needs to be entered in the format of row then
+    column, e.g. 'F4' or 'A2' a letter followed by a number,
+    no spaces, dashes, dots or bottles of rum before after or in the
+    middle. Try again!''')
                     else:
                         print('''
     The starting location needs to be entered in the format of row then
