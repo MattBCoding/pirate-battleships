@@ -50,13 +50,19 @@ class Board:
             ['Sloop', 4],
             ['Pinnace', 5]
             ]
-        player_ships = []
+        self.ships = []
         x = 0
         while x < self.number_of_ships:
             v = x % len(ships)
-            player_ships.append(ships[v])
+            self.ships.append(ships[v])
             x += 1
-            print(player_ships)
+            print(self.ships)
+        self.sort_ships()
+
+    def sort_ships(self):
+        self.ships = (sorted(self.ships, reverse=True, key=lambda x: x[1]))
+        print('From inside sort_ships')
+        print(self.ships)
 
 
 def setup(dimensions, difficulty):
@@ -98,6 +104,9 @@ def setup(dimensions, difficulty):
         letter += 1
 
     player.create_ships(player.calculate_number_of_ships())
+    print('From inside setup')
+    print(player.ships)
+
     # for row in range(dimensions):
     #     print(player.board[row][column])
     #     row += 1
