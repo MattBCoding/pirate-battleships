@@ -65,6 +65,33 @@ class Board:
         print(self.ships)
 
 
+def check_ship_orientation(user_input_coords_list,
+                           dimensions, board, ship_size):
+    '''
+    checks if ship can be placed horizontally and/or vertically
+    on the board. checks will ship fit, then checks if something
+    already there.
+    parameters: user_input_coords_list, ship dimensions and board being checked
+    '''
+    # vertical orientation from row check
+    vertical_check = (dimensions -
+                      (ord(user_input_coords_list[0].upper()) - 65)
+                      - ship_size >= 0)
+    # horizontal orientation from column check
+    horizontal_check = (dimensions - int(user_input_coords_list[1])
+                        - ship_size >= 0)
+    if horizontal_check:
+        if vertical_check:
+            print("Ship fits both horizontally and vertically")
+        else:
+            print("Ship fits horizontally but not vertically")
+    else:
+        if vertical_check:
+            print("ship fits vertically but not horizontally")
+        else:
+            print("ship doesn't fit either horizontally or vertically")
+
+
 def check_user_coords_input(user_input, dimensions):
     '''
     Function checks the user input values are correct and located on the board
@@ -88,9 +115,9 @@ def check_user_coords_input(user_input, dimensions):
                 column_test = (int(user_input_coords_list[1]) < dimensions)
                 if(row_test and column_test):
                     print('coords on board')
-                    return True
+                    return True, user_input_coords_list
                 else:
-                    print(f'''
+                    print('''
     The location entered is not on the board! The format is row then column,
     e.g. 'A2' or 'C5'. Try Again!''')
                     return False
@@ -168,6 +195,16 @@ def setup(dimensions, difficulty):
     {ship[1]} tiles long, in the format of row then column e.g. 'E4' : ''')
                 if check_user_coords_input(user_input_coords, dimensions):
                     print("ok to proceed to orientation")
+                    # check orientation options - can ship be placed horizontal
+                    # or vertical from entered coords - if both ask user which
+                    # if only one, inform user which it is and place/create
+                    # ship.
+                    # how to check if it fits, have size of ship in ship[1]
+                    # need to reference the board, check if the corrosponding
+                    # tiles only contain ~ which is empty.
+                    check_ship_orientation(
+                        list(user_input_coords), dimensions,
+                        player.board, ship[1])
             except TypeError:
                 print('''
     The starting location needs to be entered in the format of row then
