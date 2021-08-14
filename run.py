@@ -90,6 +90,33 @@ def check_ship_orientation(user_input_coords_list,
     if horizontal_check:
         if vertical_check:
             print("Ship fits both horizontally and vertically")
+            # check board to see if locations are clear
+            # both vertically and horizontally
+            # horizontal
+            for i in range(ship_size):
+                if board[row_coord_value][column_coord_value] == '~':
+                    clear_space_horizontal.append((row_coord_value,
+                                                  column_coord_value))
+                    column_coord_value += 1
+                else:
+                    column_coord_value += 1
+            # vertical
+            for i in range(ship_size):
+                if board[row_coord_value][column_coord_value] == '~':
+                    clear_space_vertical.append((row_coord_value,
+                                                column_coord_value))
+                    row_coord_value += 1
+                else:
+                    print("You cannot place a ship there it hits another ship")
+                    row_coord_value += 1
+            if ship_size == len(clear_space_horizontal):
+                if ship_size == len(clear_space_vertical):
+                    return "Can be placed horizontally and vertically"
+                else:
+                    return "Can be placed horizontally"
+            elif ship_size == len(clear_space_vertical):
+                return "Can be placed vertically"
+
         else:
             print("Ship fits horizontally but not vertically")
             # check board to see if locations are clear (only contain ~)
@@ -101,9 +128,9 @@ def check_ship_orientation(user_input_coords_list,
                 else:
                     column_coord_value += 1
             if ship_size == len(clear_space_horizontal):
-                return True
+                return "Can be placed horizontally"
             else:
-                return False
+                return "Can fit horizontally but hits another ship"
 
     else:
         if vertical_check:
@@ -118,9 +145,9 @@ def check_ship_orientation(user_input_coords_list,
                     print("You cannot place a ship there it hits another ship")
                     row_coord_value += 1
             if ship_size == len(clear_space_vertical):
-                return True
+                return "Can be placed vertically"
             else:
-                return False
+                return "Can fit vertically but hits another ship"
         else:
             print("ship doesn't fit either horizontally or vertically")
 
