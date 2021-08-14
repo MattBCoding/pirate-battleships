@@ -107,15 +107,14 @@ def check_ship_orientation(user_input_coords_list,
                                                 column_coord_value))
                     row_coord_value += 1
                 else:
-                    print("You cannot place a ship there it hits another ship")
                     row_coord_value += 1
             if ship_size == len(clear_space_horizontal):
                 if ship_size == len(clear_space_vertical):
-                    return "Can be placed horizontally and vertically"
+                    return 1
                 else:
-                    return "Can be placed horizontally"
+                    return 2
             elif ship_size == len(clear_space_vertical):
-                return "Can be placed vertically"
+                return 3
 
         else:
             print("Ship fits horizontally but not vertically")
@@ -128,9 +127,9 @@ def check_ship_orientation(user_input_coords_list,
                 else:
                     column_coord_value += 1
             if ship_size == len(clear_space_horizontal):
-                return "Can be placed horizontally"
+                return 4
             else:
-                return "Can fit horizontally but hits another ship"
+                return 5
 
     else:
         if vertical_check:
@@ -142,14 +141,13 @@ def check_ship_orientation(user_input_coords_list,
                                                 column_coord_value))
                     row_coord_value += 1
                 else:
-                    print("You cannot place a ship there it hits another ship")
                     row_coord_value += 1
             if ship_size == len(clear_space_vertical):
-                return "Can be placed vertically"
+                return 6
             else:
-                return "Can fit vertically but hits another ship"
+                return 7
         else:
-            print("ship doesn't fit either horizontally or vertically")
+            return 8
 
 
 def check_user_coords_input(user_input, dimensions):
@@ -175,7 +173,7 @@ def check_user_coords_input(user_input, dimensions):
                 column_test = (int(user_input_coords_list[1]) < dimensions)
                 if(row_test and column_test):
                     print('coords on board')
-                    return True, user_input_coords_list
+                    return True
                 else:
                     print('''
     The location entered is not on the board! The format is row then column,
@@ -262,9 +260,44 @@ def setup(dimensions, difficulty):
                     # how to check if it fits, have size of ship in ship[1]
                     # need to reference the board, check if the corrosponding
                     # tiles only contain ~ which is empty.
-                    check_ship_orientation(
-                        list(user_input_coords), dimensions,
-                        player.board, ship[1])
+                    if check_ship_orientation(
+                            list(user_input_coords), dimensions,
+                            player.board, ship[1]) == 1:
+                        print("Ask for orientation, can be H or V")
+                        break
+                    elif check_ship_orientation(
+                            list(user_input_coords), dimensions,
+                            player.board, ship[1]) == 2:
+                        print("Can only be H, V hits another ship")
+                        break
+                    elif check_ship_orientation(
+                            list(user_input_coords), dimensions,
+                            player.board, ship[1]) == 3:
+                        print("Can only be V, H hits another ship")
+                        break
+                    elif check_ship_orientation(
+                            list(user_input_coords), dimensions,
+                            player.board, ship[1]) == 4:
+                        print("Can only be H, placing ship")
+                        break
+                    elif check_ship_orientation(
+                            list(user_input_coords), dimensions,
+                            player.board, ship[1]) == 5:
+                        print("Can not place ship H would hit another ship")
+                    elif check_ship_orientation(
+                            list(user_input_coords), dimensions,
+                            player.board, ship[1]) == 6:
+                        print("Can only be V, placing ship")
+                        break
+                    elif check_ship_orientation(
+                            list(user_input_coords), dimensions,
+                            player.board, ship[1]) == 7:
+                        print("Can not place ship V would hit other ship")
+                    elif check_ship_orientation(
+                            list(user_input_coords), dimensions,
+                            player.board, ship[1]) == 8:
+                        print("Ship doesn't fit either H or V")
+
             except TypeError:
                 print('''
     The starting location needs to be entered in the format of row then
