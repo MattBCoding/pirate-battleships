@@ -73,12 +73,18 @@ def check_ship_orientation(user_input_coords_list,
     already there.
     parameters: user_input_coords_list, ship dimensions and board being checked
     '''
+    # convert row coord value into int to perform checks
+    row_coord_value = (ord(user_input_coords_list[0].upper()) - 65)
+    # convert column coord value into int to perform checks
+    column_coord_value = int(user_input_coords_list[1])
+    # holding list to check space against
+    clear_space = []
     # vertical orientation from row check
     vertical_check = (dimensions -
-                      (ord(user_input_coords_list[0].upper()) - 65)
+                      row_coord_value
                       - ship_size >= 0)
     # horizontal orientation from column check
-    horizontal_check = (dimensions - int(user_input_coords_list[1])
+    horizontal_check = (dimensions - column_coord_value
                         - ship_size >= 0)
     if horizontal_check:
         if vertical_check:
@@ -88,6 +94,18 @@ def check_ship_orientation(user_input_coords_list,
     else:
         if vertical_check:
             print("ship fits vertically but not horizontally")
+            # check board to see if locations are clear (only contain ~)
+            for i in range(ship_size):
+                if board[row_coord_value][column_coord_value] == '~':
+                    clear_space.append((row_coord_value, column_coord_value))
+                    row_coord_value += 1
+                else:
+                    print("You cannot place a ship there it hits another ship")
+                    row_coord_value += 1
+            if ship_size == len(clear_space):
+                return True
+            else:
+                return False
         else:
             print("ship doesn't fit either horizontally or vertically")
 
