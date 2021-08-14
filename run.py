@@ -78,7 +78,8 @@ def check_ship_orientation(user_input_coords_list,
     # convert column coord value into int to perform checks
     column_coord_value = int(user_input_coords_list[1])
     # holding list to check space against
-    clear_space = []
+    clear_space_vertical = []
+    clear_space_horizontal = []
     # vertical orientation from row check
     vertical_check = (dimensions -
                       row_coord_value
@@ -91,18 +92,32 @@ def check_ship_orientation(user_input_coords_list,
             print("Ship fits both horizontally and vertically")
         else:
             print("Ship fits horizontally but not vertically")
+            # check board to see if locations are clear (only contain ~)
+            for i in range(ship_size):
+                if board[row_coord_value][column_coord_value] == '~':
+                    clear_space_horizontal.append((row_coord_value,
+                                                  column_coord_value))
+                    column_coord_value += 1
+                else:
+                    column_coord_value += 1
+            if ship_size == len(clear_space_horizontal):
+                return True
+            else:
+                return False
+
     else:
         if vertical_check:
             print("ship fits vertically but not horizontally")
             # check board to see if locations are clear (only contain ~)
             for i in range(ship_size):
                 if board[row_coord_value][column_coord_value] == '~':
-                    clear_space.append((row_coord_value, column_coord_value))
+                    clear_space_vertical.append((row_coord_value,
+                                                column_coord_value))
                     row_coord_value += 1
                 else:
                     print("You cannot place a ship there it hits another ship")
                     row_coord_value += 1
-            if ship_size == len(clear_space):
+            if ship_size == len(clear_space_vertical):
                 return True
             else:
                 return False
